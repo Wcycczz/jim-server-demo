@@ -25,31 +25,6 @@ import com.jfinal.kit.PropKit;
 public class ImServerDemoStart {
 
 	public static void main(String[] args) throws Exception {
-		// 原生SQL
-//		DruidDataSource source = DataSourceUtil.getDataSource();
-//		DruidPooledConnection connection = source.getConnection();
-//		String sql = "select count(0) from user_verify_log";
-//		PreparedStatement pstmt = connection.prepareStatement(sql);
-//		ResultSet rs = pstmt.executeQuery();
-//		if (rs.next()) {
-//			System.out.println(rs.getInt(1));
-//		}
-//		try {
-//			rs.close();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		try {
-//			pstmt.close();
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-
-//		DruidPooledPreparedStatement sd = (DruidPooledPreparedStatement)connection.prepareStatement(sql);
-//		sd.setString(1, "zzzz");
-//		sd.setString(2, "aaaa");
-//		sd.setTimestamp(3, new Timestamp(new Date().getTime()));
-//		sd.execute();
 
 		PropKit.use("app.properties");
 		int port = PropKit.getInt("port");// 启动端口

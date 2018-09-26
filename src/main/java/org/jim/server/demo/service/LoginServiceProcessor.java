@@ -50,16 +50,8 @@ public class LoginServiceProcessor implements LoginProcessorIntf {
 	 */
 	public User getUser(String loginname, String password, String token) {
 		User user = null;
-		try {
-			user = UserDao.getInstance().login(loginname, password, token);
-		} catch (Exception e) {
-		}
-
-		// String text = loginname+password;
-		// String key = Const.authkey;
-		// String token = Md5.sign(text, key, HttpConst.CHARSET_NAME);
-		// User user = getUser(token);
-		// user.setId(loginname);
+		user = getUser(token);
+//		 user.setId(loginname);
 		return user;
 	}
 
@@ -74,7 +66,14 @@ public class LoginServiceProcessor implements LoginProcessorIntf {
 		// demo中用map，生产环境需要用cache
 		User user = tokenMap.get(token);
 		if (user == null) {
-			user = getUser("", "", token);
+			try {
+				user = UserDao.getInstance().login("", "", token);
+			} catch (Exception e) {
+			}
+
+			if (tokenMap.size() > 50000) {
+				tokenMap.clear();
+			}
 
 			tokenMap.put(token, user);
 		}

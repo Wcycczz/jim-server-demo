@@ -3,6 +3,7 @@
  */
 package org.jim.server.demo.command;
 
+import org.apache.log4j.Logger;
 import org.jim.common.ImPacket;
 import org.tio.core.ChannelContext;
 import org.jim.common.http.HttpConst;
@@ -22,11 +23,14 @@ import org.jim.server.command.handler.processor.handshake.WsHandshakeProcessor;
  */
 public class DemoWsHandshakeProcessor extends WsHandshakeProcessor{
 	
+	private static final Logger log = Logger.getLogger(DemoWsHandshakeProcessor.class);
+	
 	/**
 	 * WS握手方法，返回Null则业务层不同意握手，断开连接!
 	 */
 	@Override
 	public ImPacket handshake(ImPacket packet, ChannelContext channelContext) throws Exception {
+		log.info("握手处理.");
 		WsRequestPacket wsRequestPacket = (WsRequestPacket) packet;
 		WsSessionContext wsSessionContext = (WsSessionContext) channelContext.getAttribute();
 		if (wsRequestPacket.isHandShake()) {
